@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Responsive Image Focus</title>
+</head>
+<!-- general styles -->
+<link rel="stylesheet" href="css/styles.css">
+<!-- styles to focus images -->
+<link rel="stylesheet" href="css/focus-common.css">
+<link rel="stylesheet" href="css/focus-H2-W3.css">
+<link rel="stylesheet" href="css/focus-H4-W3.css">
+<!-- Modernizr test to see if the browser supports the css calc() function -->
+<script src="modernizr.custom.53010.js"></script>
+<style>
+	/*override size and position of the images if there is no support for the css calc() function, according to the Modernizr test*/
+	.no-csscalc .focus img{
+		width: 100%;
+		max-width: 100%;
+		top:0;
+		left:0;
+	}
+</style>
+<body>
+	<div id="container">
+		<header>
+			<p>Slowly shrink the width of the browser window, while you can see how an area of ​​the image is focused</p>
+			<!-- font-size determines the zoom level of the image, while the Hy-Wx class assigns the type of proportion according to the style sheet of the same name -->
+			<div style="font-size:140px" class="ImageContainer H2-W3">
+				<div class="focus vertical-focus-down-2 horizontal-focus-right-9">
+					<img src="img/landscape1.jpg">
+				</div>
+			</div>
+			<div style="font-size:50px" class="ImageContainer H4-W3">
+				<div class="focus vertical-focus-up-2 horizontal-focus-left-15">
+					<img src="img/landscape2.jpg">
+				</div>			
+			</div>
+		</header>
+	</div>
+</body>
+</html>
