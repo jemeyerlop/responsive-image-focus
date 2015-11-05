@@ -1,0 +1,30 @@
+body{
+	padding: 0;
+	margin: 0;
+	background-color: #111;
+	color: #ddd;
+	text-align: center;
+	}
+#container{
+	width: 90%;
+	margin: 0 auto;
+	padding: 0;
+}
+header{
+	float: left;
+	padding: 0;
+	margin: auto;
+	width: 100%;
+	height: auto;
+}
+.ImageContainer{
+	padding: 0;
+	margin: 2.5%;
+	float: left;
+	width: 45%;
+}
+img{
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+}
