@@ -1,0 +1,32 @@
+Responsive Image Focus (RIF)
+Author: Juan Enrique Meyer, 2015
+License: MIT
+https://github.com/jemeyerlop/responsive-image-focus
+
+Purpose:
+
+When a responsive image shrinks you can lose focus on the most important part of the picture. RIF allows you to choose the area of interest of the image to zoom in on it as the image shrinks. This will always keep attention on the most important area of the image.
+
+Instructions and functioning:
+
+Open the 'focus-Hy-Wx.less' file to generate the necessary CSS rules.
+
+Set the values of the variables '@Hy' (height) and '@Wx' (width) depending on the ratio between height and width of the image you want to apply the focus. For example, if the size of the image is 1600px wide by 1200px high, you can write @Wx:4 and @Hy:3.
+
+The variable '@grids' defines the number of grids from the center towards each side (the more grids, the more accuracy to choose an area, but the CSS file will be heavier).
+
+The variable '@focus-start' defines the window width (in a media query) from which the focus is activated.
+
+After setting the 4 variables described, generate the CSS file. If you want to focus on images of different proportions, you must generate a CSS file for each different proportion, changing the variables '@Hy' and '@Wx' in each case. Name the css files according to their proportions (as in the example) and put them under '<link rel="stylesheet" href="css/focus-common.css">' (as in the example).
+
+The 'focus-common.css' file contains other CSS rules necessary for the proper functioning of RIF, which remain always the same, regardless of the proportions of the images.
+
+RIF requires the calc() function of CSS. In the example is used a test of 'Modernizr' that detects whether there is support for the calc() function or not. If no support, the '.no-csscalc' class is generated and a CSS rule that overrides the rules of RIF is applied, leaving all canceled. You can also see the possibility of using a polyfill for CSS calc() function.
+
+The image tag is wrapped by two div tags. In the outermost div tag the 'font-size' property within the attribute 'style' determines the level of zoom. The more 'font-size' level, the more zoom level. In the same div tag you should put the class of CSS that corresponds to the ratio of the image. For example: if in the file called 'focus-Hy-Wx.less' variables of height and width were determined as @Hy:3 and @Wx:4, then the CSS class for this ratio is called '.H3-W4', therefore, for each image you must assign the class that corresponds to the respective proportion, which is in the css file that was generated for that proportion.
+
+Finally, in the div tag that wraps the image tag you can select the area to be focused (see example in index.html) as follows:
+
+a) use the class 'vertical-focus-down-"y"' or 'vertical-focus-up-"y"' to move the focus vertically. If you do not use any of the two, it automatically becomes focused in the center. The value of "y" can be from 1 to the number of grids that are determined in the variable '@grids' in the 'focus-Hy-Wx.less' file.
+
+b) use the class 'horizontal-focus-right-"x"' or 'horizontal-focus-left-"x"' to move the focus vertically. If you do not use any of the two, it automatically becomes focused in the center. The value of "x" can be from 1 to the number of grids that are determined in the variable '@grids' in the 'focus-Hy-Wx.less' file.
