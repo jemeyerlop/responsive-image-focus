@@ -1,0 +1,33 @@
+Responsive Image Focus
+Autor: Juan Enrique Meyer, 2015
+Licencia: MIT
+https://github.com/jemeyerlop/responsive-image-focus
+
+Propósito:
+
+Cuando una imagen responsive se achica se puede perder la atención sobre la parte más importante de la imagen. RIF permite elegir la zona de interés de la imagen para hacer zoom sobre ella en la medida que la imagen se achica. Esto mantendrá la atención sobre la parte que más importa de la imagen. 
+
+Instrucciones y funcionamiento:
+
+Abrir el archivo 'focus-Hy-Wx.less' para generar las reglas de css necesarias.
+
+Establecer los valores de las variables '@Hy' (alto) y '@Wx' (ancho) dependiendo de la proporción entre alto y ancho de la imagen sobre la que se desea aplicar el enfoque. Por ejemplo si el tamaño de la imagen es de 1600px de ancho por 1200px de alto se puede escribir @Wx:4 y @Hy:3.
+
+La variable '@grids' define la cantidad de grillas desde el centro hacia cada dirección (mientras más grillas, más exactitud para elegir una zona, pero más pesado será el archivo de css).
+
+La variable '@focus-start' define el ancho de ventana (en una media query) a partir del cual se activa el enfoque.
+
+Luego de establecer las 4 variables descritas, generar el archivo css. Si se desea enfocar sobre imágenes de distintas proporciones habrá que generar un archivo de css para cada proporción distinta cambiando las variables '@Hy' y '@Wx' en cada caso. Nombrar los archivos css según sus proporciones (como en el ejemplo) y ponerlos abajo de '<link rel="stylesheet" href="css/focus-common.css">' (como en el ejemplo).
+
+El archivo 'focus-common.css' contiene otras reglas de css necesarias para el correcto funcionamiento de RIF que se mantienen siempre iguales, independientemente de las proporciones de las imágenes.
+
+RIF requiere de la función calc() de css. En el ejemplo se usa un test de 'Modernizr' que detecta si hay soporte para la función calc() de css. Si no hay soporte se genera la clase '.no-csscalc' y se aplica una regla de css que sobreescribe las reglas del enfoque, dejando todo anulado. También se puede ver la posibilidad de usar un polyfill para la función calc() de css.
+
+La etiqueta de imagen está envuelta por dos div. En el div más externo la propiedad 'font-size' dentro del atributo 'style' determina el nivel de zoom. A mayor 'font-size', mayor zoom para la foto específica que se encuentra envuelta por el div. En ese mismo div se debe poner la clase de css correspondiente a la proporción de la imagen. Por ejemplo si en el archivo 'focus-Hy-Wx.less' se determinaron las variables de altura y ancho como @Hy:3 y @Wx:4, entonces la clase para esa proporción se llamará '.H3-W4', por lo tanto a cada imagen hay que asignarle la clase que le corresponda según su proporción, la cual se encuentra en el archivo css que se generó para dicha proporción.
+
+Por último, en el div que envuelve directamente a la etiqueta de imagen se selecciona el área que debe ser enfocada (ver ejemplo en index.html) como se indica a continuación:
+
+a) usar la clase 'vertical-focus-down-"y"' o 'vertical-focus-up-"y"' para desplazar el foco verticalmente. Si no se usa ninguna de las dos, automáticamente queda enfocado en el centro. El valor de "y" puede ser desde 1 hasta la cantidad de grillas que se determinó en la variable '@grids' del archivo 'focus-Hy-Wx.less'.
+
+b) usar la clase 'horizontal-focus-right-"x"' o 'horizontal-focus-left-"x"' para desplazar el foco horizontalmente. Si no se usa ninguna de las dos, automáticamente queda enfocado en el centro. El valor de "x" puede ser desde 1 hasta la cantidad de grillas que se determinó en la variable '@grids' del archivo 'focus-Hy-Wx.less'.
+
