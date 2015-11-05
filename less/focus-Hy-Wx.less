@@ -1,0 +1,70 @@
+//set values for @Hy, @Wx, @grids and @focus-start:
+//ratio of height (@Hy) and width (@Wx) of the image
+@Hy:4;
+@Wx:3;
+//number of grids from the center to each side (top, right, bottom and left)
+@grids:20;
+//window width from which the focus is activated (media query)
+@focus-start:1000px;
+
+//other variables that are generated from @Hy and @Wx:
+@Hy-Wx-class:~"H@{Hy}-W@{Wx}";
+@ratio:@Hy/@Wx;
+@ratio-percentage:(@Hy/@Wx)*100;
+
+//height of '.focus' according to the proportion of the image
+.@{Hy-Wx-class} .focus{
+		//depending on the ratio between height and width of the image: "(Hy/Wx)*100=z%"
+		padding: unit(@ratio-percentage, %) 0 0 0;
+}
+
+//media query to start focus
+@media screen and (max-width:@focus-start){
+    .@{Hy-Wx-class}{
+	//rule for focusing image
+    	.focus img{
+    			width: ~"calc(100% + 2em)";//it is recommended to include a polyfill for css calc() function
+    			max-width: ~"calc(100% + 2em)";
+    			//default 'top' and 'left' properties
+    			top:unit(-@ratio, em);//vertically centered
+    			left:-1em;//horizontally centered
+    	}
+    	
+        //generate grids from the center to the top side
+        .generate-class-vertical-focus-up(@n, @i: @grids) when (@i >= @n) {
+            .vertical-focus-up-@{i} img {
+            top:unit(@ratio, em)*(@i - @grids)/@grids;
+            }
+            .generate-class-vertical-focus-up(@n, (@i - 1));
+        }
+        .generate-class-vertical-focus-up(1);
+        
+        //generate grids from the center to the bottom side
+        .generate-class-vertical-focus-down(@n, @i: 1) when (@i =< @n) {
+            .vertical-focus-down-@{i} img {
+            top:unit(@ratio, em)*-(@i + @grids)/@grids;
+            }
+            .generate-class-vertical-focus-down(@n, (@i + 1));
+        }
+        .generate-class-vertical-focus-down(@grids);
+        
+        //generate grids from the center to the left side
+        .generate-class-horizontal-focus-left(@n, @i: @grids) when (@i >= @n) {
+            .horizontal-focus-left-@{i} img {
+            left:unit(1, em)*(@i - @grids)/@grids;
+            }
+            .generate-class-horizontal-focus-left(@n, (@i - 1));
+        }
+        .generate-class-horizontal-focus-left(1);
+        
+        //generate grids from the center to the right side
+        .generate-class-horizontal-focus-right(@n, @i: 1) when (@i =< @n) {
+            .horizontal-focus-right-@{i} img {
+            left:unit(1, em)*-(@i + @grids)/@grids;
+            }
+            .generate-class-horizontal-focus-right(@n, (@i + 1));
+        }
+        .generate-class-horizontal-focus-right(@grids);
+
+    }
+}
